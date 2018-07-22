@@ -4,10 +4,20 @@ const pageObjects = new PageObject();
 
 const helpers = new Helpers(browser);
 
-browser.get('http://www.ulbra.br/');
+export default class ValidateMainPage {
+    constructor(){
 
-//browser.executeScript('$(\'[name="superior"]\').hide()');
-helpers.isElementDisplayed(pageObjects.unidadeDropdown);
-helpers.clickOnElementIfDisplayed(pageObjects.unidadeDropdown, 20000, 'Test');
+    }
+    async testFirstPage() {
+        browser.get('http://www.ulbra.br/');
+        await browser.sleep(3000);
+        browser.executeScript('document.getElementsByName("superior").disabled = true;');
+        await helpers.waitElementToBeClickAble(pageObjects.unidadeDropdown, 2000, 'bb');
+        await helpers.clickOnElementIfDisplayed(pageObjects.unidadeDropdown, 2000, 'Test');
+    }
+}
+
+const v = new ValidateMainPage();
+v.testFirstPage();
 
 
